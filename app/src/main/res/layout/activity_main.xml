@@ -24,7 +24,7 @@
         android:id="@+id/btnPlayVideo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="12dp"
         android:background="@android:color/holo_orange_dark"
         android:text="Play video"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,9 +36,9 @@
         android:id="@+id/btnPlayMusic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:background="@android:color/holo_orange_dark"
         android:text="Play music"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,21 +48,31 @@
         android:id="@+id/btnPauseMusic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
         android:background="@android:color/holo_orange_dark"
         android:text="Pause music"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnPlayVideo" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="move back and forth"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarVolume" />
+
     <SeekBar
         android:id="@+id/seekBarVolume"
         android:layout_width="136dp"
         android:layout_height="10dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/btnPlayMusic"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toEndOf="@+id/btnPauseMusic"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -70,11 +80,21 @@
         android:id="@+id/textView"
         android:layout_width="136dp"
         android:layout_height="17dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="36dp"
         android:text="Change volume of music"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/btnPlayMusic"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toEndOf="@+id/btnPauseMusic"
         app:layout_constraintTop_toBottomOf="@+id/btnPlayVideo" />
+
+    <SeekBar
+        android:id="@+id/seekBarMove"
+        android:layout_width="124dp"
+        android:layout_height="11dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
