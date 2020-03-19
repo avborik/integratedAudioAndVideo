@@ -13,7 +13,10 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener {
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, SeekBar.OnSeekBarChangeListener, MediaPlayer.OnCompletionListener {
 
     private VideoView myVideoView;
     private Button btnPlayVideo;
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SeekBar seekBarVolume;
     private AudioManager audioManger;
     private SeekBar moveBackAndForthSeekBar;
+    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,23 +76,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         moveBackAndForthSeekBar.setOnSeekBarChangeListener(this);
+        moveBackAndForthSeekBar.setMax(mediaPlayer.getDuration());
+        mediaPlayer.setOnCompletionListener(this);
 
     }
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if(fromUser){
-            Toast.makeText(this, Integer.toString(progress), Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, Integer.toString(progress), Toast.LENGTH_LONG).show();
+            mediaPlayer.seekTo(progress);
         }
     }
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-
+            mediaPlayer.pause();
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-
+            mediaPlayer.start();
     }
 
     @Override
@@ -107,12 +114,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             break;
             case R.id.btnPlayMusic:
                 mediaPlayer.start();
+                timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        moveBackAndForthSeekBar.setProgress(mediaPlayer.getCurrentPosition());
+                    }
+                },0,1000);
             break;
             case R.id.btnPauseMusic:
                 mediaPlayer.pause();
+                timer.cancel();
             break;
         }
 
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+        timer.cancel();
+        Toast.makeText(this,"The music is ended",Toast.LENGTH_LONG).show();
     }
 }
 
